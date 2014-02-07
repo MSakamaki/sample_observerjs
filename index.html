@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+</body>
+	<script src="observerjs.js"></script>
+	<script>
+	// Dean Edwards/Matthias Miller/John Resig
+	function init() {
+		// create instance
+		var gObserverSvc = new ObserverSubject();
+
+		// observer must have `handleMessage` method.
+		var observer = {
+		  handleMessage: function (topic, data) {
+		    console.log(topic + ", " + data);
+		  },
+		};
+
+		// register the observer to message id.
+		gObserverSvc.add("hello", observer);
+
+		// broadcast message to registered observers.
+		gObserverSvc.notify("hello", "Brendan"); // "hello, Brendan"
+
+		// unregister the observer from message id.
+		gObserverSvc.remove("hello", observer);
+	};
+
+	/* for Mozilla/Opera9 */
+	if (document.addEventListener) {
+	  document.addEventListener("DOMContentLoaded", init, false);
+	} else if (/WebKit/i.test(navigator.userAgent)) { /* for Safari */
+		var _timer = setInterval(function() {
+			if (/loaded|complete/.test(document.readyState)) {
+				init(); // call the onload handler
+			}
+		}, 10);
+	} else if (/MSIE/i.test(window.navigator.userAgent)) {
+		document.write("<script id=__ie_onload defer src=javascript:void(0)><\/script>");
+		var script = document.getElementById("__ie_onload");
+		script.onreadystatechange = function() {
+		if (this.readyState == "complete") {
+			init(); // call the onload handler
+		}
+		};
+	} else {
+		/* for other browsers */
+		window.onload = init;
+	}
+
+
+	</script>
+</html>
