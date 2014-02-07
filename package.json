@@ -1,0 +1,14 @@
+{
+  "name": "sample_observerjs",
+  "version": "0.0.1",
+  "description": "play observer ",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MSakamaki/sample_observerjs.git"
+  },
+  "devDependencies": {
+    "gulp-rename": "~0.2.2",
+    "gulp-esmangle": "~1.0.0",
+    "gulp": "~3.5.0"
+  }
+}
